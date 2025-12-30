@@ -32,8 +32,8 @@ Creación del ambiente virtual
 python3.11 -m venv venv  
 
 Activación del ambiente virtual  
-source venv/bin/activate  # Linux / Mac
-venv\Scripts\activate     # Windows
+source venv/bin/activate  # Linux / Mac  
+venv\Scripts\activate     # Windows  
 source venv/scripts/activate  # Con git bash en Windows  
 
 Instalación de los requerimientos de la apliación  
