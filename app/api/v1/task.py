@@ -15,7 +15,7 @@ def create_new_task(payload: TaskCreate, db:Session = Depends(get_db), current_u
     return create_task(db, task_in=payload, user_id=current_user.id)
 
 #endpoint to get tasks created by the current user
-@router.get("/my_taks", response_model=PaginatedTasks, status_code=status.HTTP_200_OK)
+@router.get("/my_tasks", response_model=PaginatedTasks, status_code=status.HTTP_200_OK)
 def list_user_tasks(db:Session = Depends(get_db), current_user = Depends(get_current_user), page: int = Query(1, ge=1), page_size: int = Query(10, ge=1, le=100)):
     total, tasks =  get_paginated_tasks(db, current_user.id, page, page_size)
     return PaginatedTasks(total=total, page=page, page_size=page_size, data=tasks)
