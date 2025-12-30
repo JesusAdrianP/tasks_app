@@ -2,8 +2,7 @@
 
 ## Descripción
 
-Esta API implementa un sistema básico de tareas (Tasks), con autenticación JWT, CRUD completo y listado paginado.
-El objetivo es demostrar capacidad de construir una API funcional, segura y mantenible usando FastAPI, SQLAlchemy y PostgreSQL.
+Esta API implementa un sistema básico de tareas (Tasks), con autenticación JWT, CRUD completo y listado paginado. Además tambien incluye un endpoint para la creación de usuarios y scripts para poblar la tabla Task y facilitar las pruebas.
 
 ## Tecnologías utilizadas
 
@@ -28,7 +27,7 @@ El objetivo es demostrar capacidad de construir una API funcional, segura y mant
 
 ### Instalación  
 
-Creación del ambiente virtual  
+Creación del ambiente virtual, en la ruta "tasks_app/" ejecutar el comando:  
 python3.11 -m venv venv  
 
 Activación del ambiente virtual  
@@ -65,7 +64,18 @@ alembic upgrade head
 
 Esto creará las tablas y el usuario para pruebas:  
 email: admin@test.com  
-password: admin123  
+password: admin123 
+
+### Poblar tabla task  
+
+en la ruta "tasks_app/" ejecutar el comando:  
+python -m app.seeds.seed_tasks
+
+### Ejecución del proyecto  
+
+En la ruta "tasks_app/" ejecutar el comando:  
+uvicorn app.main:app --reload
+
 
 ## Ejemplos de uso en Postman  
 

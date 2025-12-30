@@ -13,8 +13,8 @@ router = APIRouter()
 
 #endpoint for user login
 @router.post("/login", response_model=TokenResponse, status_code=status.HTTP_200_OK)
-def login_user(payload: OAuth2PasswordRequestForm = Depends(), db:Session = Depends(get_db)):
-    user = authenticate_user(db, payload.username, payload.password)
+def login_user(payload: LoginRequest, db:Session = Depends(get_db)):
+    user = authenticate_user(db, payload.email, payload.password)
     
     if not user:
         return JSONResponse(status_code=status.HTTP_401_UNAUTHORIZED, content={"message":"Invalid credentials"})
