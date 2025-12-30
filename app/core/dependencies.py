@@ -30,6 +30,5 @@ def get_current_user( token: str = Depends(oauth2_scheme), db: Session = Depends
 
     if not user or not user.is_active:
         raise HTTPException(status_code=401, detail="User inactive")
-    print("current_user_id:",user.id)
 
     return user

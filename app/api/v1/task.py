@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Depends, Query
+from fastapi import APIRouter, status, Depends, Query, HTTPException
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
@@ -35,11 +35,11 @@ def update_task_by_id(task_id:int, payload:TaskUpdate, db:Session = Depends(get_
     return update_task(db, task, payload)
 
 #endpoint to delete a task
-@router.delete("/delete/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_task(task_id:int, db:Session = Depends(get_db), current_user = Depends(get_current_user)):
+@router.delete("/delete/{task_id}", status_code=status.HTTP_200_OK)
+def delete_task_by_id(task_id:int, db:Session = Depends(get_db), current_user = Depends(get_current_user)):
     task = get_task_by_id(db, task_id, current_user.id)
     if not task:
         return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={"message":"Task not found"})
     
     delete_task(db, task)
-    return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content={"message": "Task deleted successfully"})
+    return JSONResponse(status_code=status.HTTP_200_OK, content={"message": "Task deleted successfully"})
